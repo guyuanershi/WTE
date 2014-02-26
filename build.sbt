@@ -1,4 +1,4 @@
-name := "twe"
+name := "wte"
 
 version := "1.0-SNAPSHOT"
 
