@@ -1,0 +1,48 @@
+@(tasteForm: Form[Taste])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+
+@title = {
+Add a new contact <small><a href="@routes.Application.add">Or edit an existing contact</a></small>
+}
+
+@main(title, nav = "restuarant") {
+
+@if(tasteForm.hasErrors) {
+<div class="alert-message error">
+    <p><strong>Oops</strong> Please fix all errors</p>
+</div>
+}
+
+<nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="@routes.Application.index">Where To Eat</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin: 100px">
+    @helper.form(action = routes.TasteController.add, args = 'role -> "form", 'class -> "form-horizontal") {
+
+    <legend>Taste information</legend>
+
+    @inputText(
+    tasteForm("name"),
+    '_label -> "Name"
+    )
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Add</button>
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+    </div>
+
+    }
+
+</div>
+}

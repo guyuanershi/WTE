@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+
+#restaurant
+GET     /rests/all                   controllers.Application.all
+GET     /rests/add                   controllers.Application.form
+POST    /rests/add                   controllers.Application.add
+
+GET     /rests/taste/all             controllers.TasteController.all
+GET     /rests/taste/add             controllers.TasteController.form
+POST    /rests/taste/add             controllers.TasteController.add
+POST    /rests/taste/delete/:id      controllers.TasteController.delete(id: String)
+
+POST    /rests/:id/update            controllers.Application.update(id: String)
+POST    /rests/:id/delete            controllers.Application.delete(id: String)
+
+
+#conditions
+GET     /conditions                 controllers.Conditions.conditions
