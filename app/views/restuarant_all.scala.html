@@ -1,4 +1,4 @@
-@(regions: List[Region])
+@(rests: List[Restuarant])
 
 @import helper._
 
@@ -19,7 +19,7 @@ Add a new contact <small><a href="@routes.Application.add">Or edit an existing c
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@routes.RegionController.add"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
+                    <li><a href="@routes.Application.add"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
                 </ul>
             </div>
         </div>
@@ -27,20 +27,32 @@ Add a new contact <small><a href="@routes.Application.add">Or edit an existing c
 </nav>
 
 <div class="container" style="margin: 100px">
-    <legend>All Regions</legend>
+    <legend>All Restuarant</legend>
     <table class="table table-hover">
         <thead>
         <tr>
             <th style="width:50px">#</th>
-            <th>Taste</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Distance</th>
+            <th>Taste Type</th>
+            <th>Price</th>
+            <th>Region</th>
         </tr>
         </thead>
 
         <tbody>
-        @regions.map { t =>
+        @rests.map { t =>
         <tr>
-            <td>@regions.indexOf(t).</td>
+            <td>@rests.indexOf(t).</td>
             <td>@t.name</td>
+            <td>@t.address</td>
+            <td>@t.phone</td>
+            <td>@t.distance</td>
+            <td>@t.tasteType</td>
+            <td>@t.price</td>
+            <td>@t.region</td>
         </tr>
         }
         </tbody>

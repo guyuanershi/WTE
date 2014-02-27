@@ -57,6 +57,10 @@ object Restuarant  {
                                        ))
   }
 
+  def add(rest: Restuarant): Option[ObjectId] = {
+    RestuarantDAO.insert(rest)
+  }
+
   def one(id: String) = Nil
 
   def delete(id: String) = {}

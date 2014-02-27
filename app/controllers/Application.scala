@@ -42,14 +42,15 @@ object Application extends Controller {
   }
 
   def all = Action {
-    Ok("all restuarants")
+    Ok(views.html.restuarant_all(Restuarant.all))
   }
 
   def add = Action { implicit request =>
     restuarantForm.bindFromRequest().fold(
       errors => BadRequest(views.html.restuarant(errors, Taste.all, Region.all)),
       restuarant => {
-        Redirect(routes.Application.all)
+        Restuarant.add(restuarant)
+        Redirect(routes.Application.add)
       }
     )
   }
