@@ -20,6 +20,11 @@ GET     /rests/taste/add             controllers.TasteController.form
 POST    /rests/taste/add             controllers.TasteController.add
 POST    /rests/taste/delete/:id      controllers.TasteController.delete(id: String)
 
+GET     /rests/region/all             controllers.RegionController.all
+GET     /rests/region/add             controllers.RegionController.form
+POST    /rests/region/add             controllers.RegionController.add
+POST    /rests/region/delete/:id      controllers.RegionController.delete(id: String)
+
 POST    /rests/:id/update            controllers.Application.update(id: String)
 POST    /rests/:id/delete            controllers.Application.delete(id: String)
 

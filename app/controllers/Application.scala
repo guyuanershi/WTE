@@ -5,6 +5,9 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.format._
 import play.api.data.Forms._
+
+import com.mongodb.casbah.commons.Imports._
+
 import models._
 
 object Application extends Controller {
@@ -24,7 +27,9 @@ object Application extends Controller {
       "tasteType" -> nonEmptyText,
       "price" -> of(Formats.doubleFormat),
       "region" -> nonEmptyText
-    )(Restuarant.apply)(Restuarant.unapply)
+    )((name, address, phone, distance, tasteType, price, region) => Restuarant(new ObjectId, name, address, phone,
+    distance, tasteType, price, region))((rest: Restuarant) => Some((rest.name, rest.address, rest.phone, rest.distance,
+    rest.tasteType, rest.price, rest.region)))
   )
 
   def index = Action {
@@ -33,7 +38,7 @@ object Application extends Controller {
 
   def form = Action {
     //Ok("restuarant Form")
-    Ok(views.html.restuarant(restuarantForm))
+    Ok(views.html.restuarant(restuarantForm, Taste.all, Region.all))
   }
 
   def all = Action {
@@ -42,7 +47,7 @@ object Application extends Controller {
 
   def add = Action { implicit request =>
     restuarantForm.bindFromRequest().fold(
-      errors => BadRequest(views.html.restuarant(errors)),
+      errors => BadRequest(views.html.restuarant(errors, Taste.all, Region.all)),
       restuarant => {
         Redirect(routes.Application.all)
       }

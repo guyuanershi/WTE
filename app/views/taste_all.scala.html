@@ -1,4 +1,4 @@
-@(tasteForm: Form[String])
+@(tastes: List[Taste])
 
 @import helper._
 
@@ -11,12 +11,6 @@ Add a new contact <small><a href="@routes.Application.add">Or edit an existing c
 
 @main(title, nav = "restuarant") {
 
-@if(tasteForm.hasErrors) {
-<div class="alert-message error">
-    <p><strong>Oops</strong> Please fix all errors</p>
-</div>
-}
-
 <nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -25,7 +19,7 @@ Add a new contact <small><a href="@routes.Application.add">Or edit an existing c
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@routes.TasteController.all"><span class="glyphicon glyphicon-list-alt"></span> All Tastes</a></li>
+                    <li><a href="@routes.TasteController.add"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
                 </ul>
             </div>
         </div>
@@ -33,23 +27,23 @@ Add a new contact <small><a href="@routes.Application.add">Or edit an existing c
 </nav>
 
 <div class="container" style="margin: 100px">
-    @helper.form(action = routes.TasteController.add, args = 'role -> "form", 'class -> "form-horizontal") {
+    <legend>All Tastes</legend>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th style="width:50px">#</th>
+                <th>Taste</th>
+            </tr>
+        </thead>
 
-    <legend>Taste information</legend>
-
-    @inputText(
-    tasteForm("name"),
-    '_label -> "Name"
-    )
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Add</button>
-            <a href="@routes.Application.form" class="btn">Cancel</a>
-        </div>
-    </div>
-    }
-
+        <tbody>
+            @tastes.map { t =>
+                <tr>
+                    <td>@tastes.indexOf(t)</td>
+                    <td>@t.name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-
 }

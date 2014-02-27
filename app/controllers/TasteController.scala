@@ -13,15 +13,23 @@ import models._
 
 object TasteController extends Controller {
 
-  val tasteForm: Form[Taste] = Form(
-    mapping(
-      "name" -> nonEmptyText
-    )(Taste.apply)(Taste.unapply)
+  val tasteForm = Form(
+    "name" -> nonEmptyText
   )
 
-  def all = TODO
+  def all = Action {
+    Ok(views.html.taste_all(Taste.all))
+  }
 
-  def add = TODO
+  def add = Action { implicit request =>
+    tasteForm.bindFromRequest().fold(
+      errors => BadRequest(views.html.taste(errors)),
+      taste => {
+        Taste.Add(taste)
+        Redirect(routes.TasteController.all)
+      }
+    )
+  }
 
   def form = Action {
     Ok(views.html.taste(tasteForm))

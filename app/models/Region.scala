@@ -1,9 +1,8 @@
 package models
 
 /**
- * Created by guyuanershi on 2/26/14.
+ * Created by guyuanershi on 2/27/14.
  */
-
 import com.novus.salat._
 import com.novus.salat.dao._
 import com.novus.salat.Context
@@ -16,24 +15,25 @@ import play.api.PlayException
 
 import db._
 
-case class Taste (_id: ObjectId = new ObjectId,
+case class Region (
+  _id: ObjectId = new ObjectId,
   name: String
 )
 
-//connect to default db & get tastes collection
-object TasteDAO extends SalatDAO[Taste, ObjectId] (
+//connect to default db & get regions collection
+object RegionDAO extends SalatDAO[Region, ObjectId] (
   collection = MongoConnection()(
     current.configuration.getString("mongodb.default.db")
       .getOrElse(throw new PlayException("Configuration error", "Could not get default db setting"))
-  )("tastes")
+  )("regions")
 )
 
-object Taste {
+object Region {
   def all = {
-    TasteDAO.find(MongoDBObject.empty).toList
+    RegionDAO.find(MongoDBObject.empty).toList
   }
 
   def Add(name: String): Option[ObjectId] = {
-    TasteDAO.insert(new Taste(name = name))
+    RegionDAO.insert(new Region(name = name))
   }
 }
