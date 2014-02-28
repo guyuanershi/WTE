@@ -7,8 +7,8 @@
 @inputType = @{ elements.args.toMap.get('type).map(_.toString).getOrElse("text")}
 
 <div class="form-group @if(elements.hasErrors) {has-error}">
-    <label for="@elements.id" class="col-md-2 control-label">
-        @elements.label
+    <label for="@elements.id" class="@elements.args.toMap.get('labelcls).getOrElse("col-md-2 control-label")">
+    @elements.label
     </label>
     <div class="@elements.args.toMap.get('inputDivClass).getOrElse("col-md-5")">
         @if(elements.input.toString().contains("class=")) {

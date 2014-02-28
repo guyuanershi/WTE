@@ -1,4 +1,8 @@
-@(message: String)
+@(sf: Form[Conditions])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @nav = {
     <li><a href="@routes.Application.form"><span class="glyphicon glyphicon-plus"></span> Add Restuarant</a></li>
@@ -6,15 +10,67 @@
 
 @main(nav) {
 
-    <div class="container" style="margin:100px;">
+    <div class="container" style="margin:80px;">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <img class="img-responsive img-rounded" src="@routes.Assets.at("images/bk.jpg")">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
             </div>
         </div>
+
+        <div style="margin: 10px">
+            @helper.form(action = routes.Application.search, args = 'class -> "form-inline", 'role -> "form", 'labelCls -> "sr-only") {
+                @defining(List(0)) { conditions =>
+                    @for(i <-0 to conditions.length - 1) {
+                        @defining(i) { index =>
+                            @defining(conditions(i)) { condtion =>
+                                @inputText(
+                                sf("conditions[" + index + "].distance"),
+                                '_label -> None,
+                                'class -> "form-control",
+                                'labelcls -> "sr-only"
+                                )
+
+                                @inputText(
+                                sf("conditions[" + index + "].taste"),
+                                '_label -> None,
+                                'class -> "form-control",
+                                'labelcls -> "sr-only"
+                                )
+
+                                @inputText(
+                                sf("conditions[" + index + "].region"),
+                                '_label -> None,
+                                'class -> "form-control",
+                                'labelcls -> "sr-only"
+                                )
+
+                                @inputText(
+                                sf("conditions[" + index + "].price"),
+                                '_label -> None,
+                                'class -> "form-control",
+                                'labelcls -> "sr-only"
+                                )
+                            }
+                        }
+                    }
+                }
+            <div class="form-group">
+                <div class="col-md-2 col-md-offset-5">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+            </div>
+            }
+        </div>
+
     </div>
+
+    <script>
+        function sc() {
+
+        }
+    </script>
 }

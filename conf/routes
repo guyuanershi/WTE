@@ -28,6 +28,4 @@ POST    /rests/region/delete/:id      controllers.RegionController.delete(id: St
 POST    /rests/:id/update            controllers.Application.update(id: String)
 POST    /rests/:id/delete            controllers.Application.delete(id: String)
 
-
-#conditions
-GET     /conditions                 controllers.Conditions.conditions
+GET     /search                      controllers.Application.search()

@@ -32,8 +32,21 @@ object Application extends Controller {
     rest.tasteType, rest.price, rest.region)))
   )
 
+  val searchForm: Form[Conditions] = Form(
+    mapping (
+      "conditions" -> list[Condition] (
+        mapping (
+          "distance" -> optional(of(Formats.doubleFormat)),
+          "taste" -> optional(text),
+          "region" -> optional(text),
+          "price" -> optional(of(Formats.doubleFormat))
+        )(Condition.apply)(Condition.unapply)
+      )
+    )(Conditions.apply)(Conditions.unapply)
+  )
+
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok(views.html.index(searchForm))
   }
 
   def form = Action {
@@ -60,4 +73,8 @@ object Application extends Controller {
   def delete(id: String) = TODO
 
 
+
+  def search() = Action {
+    Ok("<select class='form-control'><option>a</option></select>")
+  }
 }
