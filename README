@@ -1,5 +1,6 @@
 This is your new Play application
 =====================================
+https://travis-ci.org/guyuanershi/WTE.svg?branch=master
 
 This file will be packaged with your application, when using `play dist`.
 
